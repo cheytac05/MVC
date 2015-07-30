@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".DisplayActivity"
+    tools:deviceIds="wear_square"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/frameLayout1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_gravity="center"
+        android:id="@+id/text01"
+        android:textSize="35sp"
+        android:textColor="#02010C"
+        android:text="EdgeWrite"
+        />
+
+    <android.support.wearable.view.DismissOverlayView
+        android:id="@+id/dismiss_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</FrameLayout>
