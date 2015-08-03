@@ -32,13 +32,40 @@ public class MainActivity extends Activity {
         });
     }
 
+
+
+    /**
+     * タッチイベントを処理する関数．
+     * タッチイベントの種類によってSWITCH文で場合分けを行う．
+     * (onTouchEventは上手くいかなかった)
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
 
         TextView tx = (TextView) findViewById(R.id.text01);
-        tx.setText("MVC");
+        tx.setText("Running");
 
-        Log.d("TouchEvent", "X : " + event.getX() + ", Y : " + event.getY());
+        // Log.d("TouchEvent", "X : " + event.getX() + ", Y : " + event.getY());
+
+
+        // タッチ動作によって動作を場合分け //
+        switch( event.getAction() ){
+
+            case MotionEvent.ACTION_DOWN:
+                Log.d("DownEvent", "down");
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                Log.d("MoveEvent", "move");
+                break;
+
+            case MotionEvent.ACTION_UP:
+                Log.d("UpEvent", "up");
+                break;
+
+
+
+        }
 
         return true;
     }
