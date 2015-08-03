@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.golab.edgewrite_mvc.R;
+import com.golab.edgewrite_mvc.models.EdgeWrite;
 
 public class MainActivity extends Activity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
+        edgeWrite = EdgeWrite.getInstance();
 
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
@@ -43,7 +45,8 @@ public class MainActivity extends Activity {
     public boolean dispatchTouchEvent(MotionEvent event) {
 
         TextView tx = (TextView) findViewById(R.id.text01);
-        tx.setText("Running");
+
+
 
         // Log.d("TouchEvent", "X : " + event.getX() + ", Y : " + event.getY());
 
@@ -51,16 +54,33 @@ public class MainActivity extends Activity {
         // タッチ動作によって動作を場合分け //
         switch( event.getAction() ){
 
+            // case 画面をタップした場合
             case MotionEvent.ACTION_DOWN:
                 Log.d("DownEvent", "down");
+
+                edgeWrite.setFirstEdge(event.getX(), event.getY());
+
                 break;
 
             case MotionEvent.ACTION_MOVE:
                 Log.d("MoveEvent", "move");
+
+                edgeWrite.setEdge(event.getX(), event.getY());
+
                 break;
 
             case MotionEvent.ACTION_UP:
                 Log.d("UpEvent", "up");
+
+                for(int i = 0; i < edgeWrite.getOrderSize(); i++) {
+
+                    String str = String.valueOf(edgeWrite.getEdge(i));
+                    
+                    if(!str.equals(0))
+                        tx.append(str);
+
+                }
+
                 break;
 
 
@@ -69,5 +89,7 @@ public class MainActivity extends Activity {
 
         return true;
     }
+
+    private EdgeWrite edgeWrite;
 
 }
